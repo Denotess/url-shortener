@@ -1,10 +1,8 @@
 package helpers
 
-import "encoding/base32"
+import "github.com/blakewilliams/go-base36"
 
-func GenerateShortUrl(oldUrl string) (string, error) {
-	url := []byte(oldUrl)
-	encodedUrl := base32.StdEncoding.EncodeToString(url)
-
-	return encodedUrl, nil
+func GenerateShortUrl(id int64) (string, error) {
+	encodedId := base36.StdEncoding.Encode(id)
+	return encodedId, nil
 }

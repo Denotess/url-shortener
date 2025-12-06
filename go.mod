@@ -8,6 +8,7 @@ require (
 )
 
 require (
+	github.com/blakewilliams/go-base36 v0.0.0-20230702205456-8f6b5c9839f1 // indirect
 	github.com/bytedance/sonic v1.14.0 // indirect
 	github.com/bytedance/sonic/loader v0.3.0 // indirect
 	github.com/cloudwego/base64x v0.1.6 // indirect

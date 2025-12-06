@@ -4,14 +4,11 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
+	"url-shortener/handlers"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/mattn/go-sqlite3"
 )
-
-type Body struct {
-	Original string `json:"original"`
-}
 
 func main() {
 	db, err := sql.Open("sqlite3", "./data.db")
@@ -22,7 +19,7 @@ func main() {
 
 	if _, err := db.Exec(`CREATE TABLE IF NOT EXISTS urls (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		short TEXT UNIQUE,
+		short TEXT UNIQUE NOT NULL,
 		original TEXT NOT NULL
 	);`); err != nil {
 		log.Fatal(err)
@@ -35,6 +32,12 @@ func main() {
 			"message": "pong",
 		})
 	})
+
+	handlers.SetDB(db)
+
+	router.POST("/shorten", handlers.Shorten)
+	router.GET("/:short", handlers.Redirect)
+
 	if err := router.Run(); err != nil {
 		log.Fatalf("failed to run server: %v", err)
 	}
