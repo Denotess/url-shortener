@@ -97,6 +97,8 @@ Table: urls
 
 The database file is created automatically at `./data.db` on first run.
 
+[Project Idea](https://roadmap.sh/projects/url-shortening-service)
+
 ## Dependencies
 
 - `github.com/gin-gonic/gin` - Web framework
